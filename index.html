@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="/vite.svg" rel="icon" type="image/svg+xml" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Journal</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@200..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="/src/main.jsx" type="module"></script>
+  <script>
+
+  </script>
+  <style>
+    #my-buttons {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+
+      opacity: 0;
+      visibility: hidden;
+      transition-property: visability, opacity;
+      transition-duration: 0.2s;
+    }
+
+    #my-buttons.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</body>
+
+</html>

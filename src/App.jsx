@@ -24,6 +24,7 @@ const INITIAL_DATA = [
 
 function App() {
   const [notes, setNotes] = useState(INITIAL_DATA)
+
   function addItem(item) {
     setNotes([
       ...notes,

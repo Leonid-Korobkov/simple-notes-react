@@ -1,20 +1,49 @@
 import './JournalForm.css'
 import Button from '../Button/Button.jsx'
+import {useState} from 'react';
 
-function JournalForm({ onSubmit }) {
+function JournalForm({onSubmit}) {
+  const [formValidState, setFormValidState] = useState({
+    title: true,
+    date: true,
+    text: true
+  })
+
   function addJournalItem(e) {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const formProps = Object.fromEntries(formData)
-    onSubmit(formProps)
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const formProps = Object.fromEntries(formData);
+
+    let isFormValid = true
+    for (const field of ['title', 'date', 'text']) {
+      if (!formProps[field]?.trim().length > 0) {
+        setFormValidState(prevState => ({
+          ...prevState,
+          [field]: false
+        }));
+        isFormValid = false;
+      } else {
+        setFormValidState(prevState => ({
+          ...prevState,
+          [field]: true
+        }));
+      }
+    }
+
+    if (!isFormValid) {
+      return
+    }
+    onSubmit(formProps);
   }
+
 
   return (
     <form action="#" className="journal-form" name="journal-form" onSubmit={addJournalItem}>
-      <input type="text" name="title" />
-      <input type="date" name="date" />
-      <input type="text" name="tag" />
-      <textarea cols="30" rows="10" name="text"></textarea>
+      <input type="text" name="title" style={formValidState.title ? {} : {border: '1px solid red'}}/>
+      <input type="date" name="date" style={formValidState.date ? {} : {border: '1px solid red'}}/>
+      <input type="text" name="tag"/>
+      <textarea cols="30" rows="10" name="text"
+                style={formValidState.text ? {} : {border: '1px solid red'}}></textarea>
       <Button>Сохранить</Button>
     </form>
   )

@@ -39,11 +39,11 @@ function JournalForm({onSubmit}) {
 
   return (
     <form action="#" className="journal-form" name="journal-form" onSubmit={addJournalItem}>
-      <input type="text" name="title" style={formValidState.title ? {} : {border: '1px solid red'}}/>
-      <input type="date" name="date" style={formValidState.date ? {} : {border: '1px solid red'}}/>
+      <input type="text" name="title" className={'input ' + (formValidState.title ? '' : 'invalid-input')}/>
+      <input type="date" name="date" className={'input ' + (formValidState.date ? '' : 'invalid-input')}/>
       <input type="text" name="tag"/>
       <textarea cols="30" rows="10" name="text"
-                style={formValidState.text ? {} : {border: '1px solid red'}}></textarea>
+                className={'input ' + (formValidState.text ? '' : 'invalid-input')}></textarea>
       <Button>Сохранить</Button>
     </form>
   )

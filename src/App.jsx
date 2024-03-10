@@ -5,7 +5,7 @@ import Header from './components/Header/Header.jsx'
 import JournalList from './components/JournalList/JournalList.jsx'
 import JournalAddButton from './components/JournalAddButton/JournalAddButton.jsx'
 import JournalForm from './components/JournalForm/JournalForm.jsx'
-import {useEffect, useState} from 'react'
+import useLocalstorage from './hooks/useLocalstorage.js';
 
 // const INITIAL_DATA = [
 //   {
@@ -37,29 +37,22 @@ import {useEffect, useState} from 'react'
 //   }
 // ]
 
+function mapItems(items) {
+  if (!items) return []
+
+  return items.map((el) =>
+    ({
+      ...el,
+      date: new Date(el.date)
+    }))
+}
 
 function App() {
-  const [notes, setNotes] = useState([])
-
-  useEffect(() => {
-    const notes = JSON.parse(localStorage.getItem('notes'))
-    if (notes) {
-      setNotes(notes.map((n) => ({
-        ...n,
-        date: new Date(n.date)
-      })))
-    }
-  }, []);
-
-  useEffect(() => {
-    if (notes.length > 0) {
-      localStorage.setItem('notes', JSON.stringify(notes))
-    }
-  }, [notes]);
+  const [notes, setNotes] = useLocalstorage('notes')
 
   function addItem(item) {
     setNotes([
-      ...notes,
+      ...mapItems(notes),
       {
         id: notes.length > 0 ? Math.max(...notes.map((el) => el.id)) + 1 : 1,
         title: item.title,
@@ -74,7 +67,7 @@ function App() {
       <LeftPanel>
         <Header></Header>
         <JournalAddButton></JournalAddButton>
-        <JournalList notes={notes}></JournalList>
+        <JournalList notes={mapItems(notes)}></JournalList>
       </LeftPanel>
       <Body>
         <JournalForm onSubmit={addItem}></JournalForm>

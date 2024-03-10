@@ -1,19 +1,3 @@
-/*.journal-form {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  gap: 30px;*/
-/*}*/
-
-/*.input {*/
-/*  border-radius: 10px;*/
-/*  padding: 12px;*/
-/*}*/
-
-/*.invalid-input {*/
-/*  outline: 1px solid indianred;*/
-/*  background: rgba(255, 0, 0, 0.2);*/
-/*}*/
-
 .journal-form {
   display: flex;
   flex-direction: column;
@@ -47,6 +31,11 @@
   /*transition: all .2s ease;*/
 }
 
+.input:focus {
+  outline: 1px solid #b0b6f3;
+  border-radius: 10px;
+}
+
 textarea {
   resize: vertical;
 }
@@ -56,10 +45,6 @@ textarea {
 /*  display: none;*/
 /*  -webkit-appearance: none;*/
 /*}*/
-
-.input-title {
-  font-size: 32px;
-}
 
 .invalid-input {
   border-radius: 10px;

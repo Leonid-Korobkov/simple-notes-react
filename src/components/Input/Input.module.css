@@ -1,0 +1,31 @@
+.input {
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  font-family: 'Source Sans 3', sans-serif;
+  border-bottom: 1px solid #323232;
+  width: 100%;
+  padding: 10px;
+  transition: outline .2s ease, background .2s ease, border-radius .2s ease;
+  /*transition: all .2s ease;*/
+}
+
+.invalid-input {
+  border-radius: 10px;
+  outline: 1px solid indianred;
+  background: rgba(255, 0, 0, 0.2);
+}
+
+
+.input-title {
+  font-size: 32px;
+}
+
+
+.input:focus {
+  outline: 1px solid #b0b6f3;
+  border-radius: 10px;
+}

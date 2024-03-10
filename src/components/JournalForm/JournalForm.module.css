@@ -1,0 +1,82 @@
+/*.journal-form {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 30px;*/
+/*}*/
+
+/*.input {*/
+/*  border-radius: 10px;*/
+/*  padding: 12px;*/
+/*}*/
+
+/*.invalid-input {*/
+/*  outline: 1px solid indianred;*/
+/*  background: rgba(255, 0, 0, 0.2);*/
+/*}*/
+
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 150px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  font-family: 'Source Sans 3', sans-serif;
+  border-bottom: 1px solid #323232;
+  width: 100%;
+  padding: 10px;
+  transition: outline .2s ease, background .2s ease, border-radius .2s ease;
+  /*transition: all .2s ease;*/
+}
+
+textarea {
+  resize: vertical;
+}
+
+/*.input::-webkit-inner-spin-button,*/
+/*.input::-webkit-calendar-picker-indicator {*/
+/*  display: none;*/
+/*  -webkit-appearance: none;*/
+/*}*/
+
+.input-title {
+  font-size: 32px;
+}
+
+.invalid-input {
+  border-radius: 10px;
+  outline: 1px solid indianred;
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.delete {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+}
+
+.delete:hover {
+  background: rgb(255, 255, 255, 0.05);
+  border-radius: 50%;
+}

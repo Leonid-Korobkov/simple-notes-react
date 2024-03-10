@@ -5,25 +5,57 @@ import Header from './components/Header/Header.jsx'
 import JournalList from './components/JournalList/JournalList.jsx'
 import JournalAddButton from './components/JournalAddButton/JournalAddButton.jsx'
 import JournalForm from './components/JournalForm/JournalForm.jsx'
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 
-const INITIAL_DATA = [
-  // {
-  //   id: 1,
-  //   title: 'Подготовка к обновлению курсов',
-  //   text: 'Горные походы открывают удивительные природные ландшафт',
-  //   date: new Date()
-  // },
-  // {
-  //   id: 2,
-  //   title: 'Поход в годы',
-  //   text: 'Думал, что очень много времени',
-  //   date: new Date()
-  // }
-]
+// const INITIAL_DATA = [
+//   {
+//     id: 1,
+//     title: 'Подготовка к обновлению курсов',
+//     text: 'Горные походы открывают удивительные природные ландшафт',
+//     date: new Date()
+//   },
+//   {
+//     id: 2,
+//     title: 'Поход в годы',
+//     text: 'Думал, что очень много времени',
+//     date: new Date()
+//   }
+// ]
+
+// const json = [
+//   {
+//     'id': 1,
+//     'title': 'Подготовка к обновлению курсов',
+//     'text': 'Горные походы открывают удивительные природные ландшафт',
+//     'date': '2024-03-10T11:39:25.428Z'
+//   },
+//   {
+//     'id': 2,
+//     'title': 'Поход в годы',
+//     'text': 'Думал, что очень много времени',
+//     'date': '2024-03-10T11:39:25.428Z'
+//   }
+// ]
+
 
 function App() {
-  const [notes, setNotes] = useState(INITIAL_DATA)
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    const notes = JSON.parse(localStorage.getItem('notes'))
+    if (notes) {
+      setNotes(notes.map((n) => ({
+        ...n,
+        date: new Date(n.date)
+      })))
+    }
+  }, []);
+
+  useEffect(() => {
+    if (notes.length > 0) {
+      localStorage.setItem('notes', JSON.stringify(notes))
+    }
+  }, [notes]);
 
   function addItem(item) {
     setNotes([

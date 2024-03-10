@@ -1,5 +1,5 @@
 .btn {
-  border-radius: 6px;
+  border-radius: 10px;
   padding: 8px 30px;
   font-family: inherit;
   cursor: pointer;
@@ -11,10 +11,11 @@
 
 @media (any-hover: hover) {
   .btn:hover {
-    background: #646cff;
+    background: #d53963;
+
   }
 }
 
 .btn--accent {
-  background: #312eb5;
+  background: #E9426F;
 }

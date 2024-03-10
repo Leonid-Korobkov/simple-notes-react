@@ -1,10 +1,10 @@
-import './Header.css'
+import st from './Header.module.css'
 
 function Header() {
   return (
     <>
       <header className="header">
-        <img className="logo-img" src="./icons/logo.svg" alt=""/>
+        <img className={st.logoImg} src="./icons/logo.svg" alt=""/>
       </header>
     </>
   )

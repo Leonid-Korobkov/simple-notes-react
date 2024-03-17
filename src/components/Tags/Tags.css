@@ -1,0 +1,148 @@
+.Tags {
+  width: 100%;
+}
+
+.TaskTags {
+  align-items: center;
+  border-radius: 8px;
+  display: flex;
+  min-height: 38px;
+  padding: 5px;
+  display: flex;
+  min-width: 1px;
+  width: 100%;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.css-fyq6mk-container {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 100%;
+  width: auto !important;
+}
+
+.Select-option {
+  align-items: center;
+  display: flex;
+}
+
+.PopoverReferenceElement {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.ActiveTaskData-content .PopoverReferenceElement {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.TaskTagWithColorSelect {
+  align-items: center;
+  display: flex;
+}
+
+.TaskTag {
+  margin-bottom: 2px;
+  margin-right: 4px;
+  margin-top: 2px;
+
+  display: flex;
+  align-items: center;
+  color: #fff;
+  fill: #fff;
+
+  border-radius: 10px;
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 8px;
+}
+
+.TaskTag-label {
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 500;
+  max-width: 180px;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+
+  font-size: 12px;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 8px;
+}
+
+.TaskTag-deleteButton {
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  height: 12px;
+  line-height: 20px;
+  min-height: 12px;
+  min-width: 12px;
+  width: 12px;
+}
+
+/* Color Select */
+.ColorSelectPopUp {
+  align-items: center;
+  background: #2B2B2B;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px #e8ecee, 0 5px 20px 0 rgba(21, 7, 38, 0.08);
+  box-sizing: border-box;
+  color: #151b26;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* height: 132px; */
+  padding: 10px;
+  position: relative;
+  width: 241px;
+  z-index: 5000;
+}
+
+.ColorItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 2px;
+  transition-property: border-color;
+  transition-duration: 200ms;
+}
+
+.ColorItem:hover {
+  border-color: #26d1b9;
+  background-color: #fff;
+}
+
+.SelectedColorItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #26d1b9;
+  border-style: solid;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 2px;
+  transition-property: border-color;
+  transition-duration: 200ms;
+}
+
+.ColorIndicator {
+  border-radius: 50%;
+  height: 18px;
+  width: 18px;
+}

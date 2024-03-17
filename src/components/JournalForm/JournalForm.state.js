@@ -23,7 +23,7 @@ export function formReducer(state, action) {
       return {...state, isValid: INITIAL_FORM_STATE.isValid}
     case 'SUBMIT': {
       const titleValid = state.values.title?.trim().length > 0
-      const dateValid = state.values.date?.trim().length > 0
+      const dateValid = state.values.date
       const textValid = state.values.text?.trim().length > 0
 
       return {

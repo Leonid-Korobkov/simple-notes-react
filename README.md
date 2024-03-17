@@ -1,4 +1,4 @@
-# Персональные заметки на React.js + Redux + Typescript
+# Персональные заметки на React.js
 
 Посмотреть результат -> [simple-notes-react](https://simple-notes-react.vercel.app)
 

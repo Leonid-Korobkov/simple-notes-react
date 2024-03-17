@@ -1,14 +1,17 @@
 import cn from 'classnames'
 import st from './JournalForm.module.css'
 import Button from '../Button/Button.jsx'
-import {useEffect, useReducer, useRef} from 'react';
+import {useContext, useEffect, useReducer, useRef} from 'react';
 import {formReducer, INITIAL_FORM_STATE} from './JournalForm.state.js';
 import Input from '../Input/Input.jsx';
+import {UserContext} from '../../context/user.context.jsx';
 
-function JournalForm({onSubmit}) {
+function JournalForm({onSubmit, dataNote}) {
   // const [formValidState, setFormValidState] = useState(INITIAL_VALID_STATE)
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_FORM_STATE)
   const {isValid, values, isFormReadyToSubmit} = formState;
+
+  const {userId} = useContext(UserContext)
 
   const titleRef = useRef()
   const dateRef = useRef()
@@ -27,6 +30,10 @@ function JournalForm({onSubmit}) {
         break;
     }
   }
+
+  useEffect(() => {
+    dispatchForm({type: 'SET_VALUES', payload: {...dataNote}})
+  }, [dataNote]);
 
   useEffect(() => {
     let timerId
@@ -48,8 +55,15 @@ function JournalForm({onSubmit}) {
     if (isFormReadyToSubmit) {
       onSubmit(values);
       dispatchForm({type: 'CLEAR_VALUES'})
+      // dispatchForm({type: 'SET_VALUES', payload: {userId}})
     }
   }, [isFormReadyToSubmit, values, onSubmit]);
+
+
+  useEffect(() => {
+    dispatchForm({type: 'SET_VALUES', payload: {userId}})
+  }, [userId]);
+
 
   function addJournalItem(e) {
     e.preventDefault();
@@ -73,7 +87,10 @@ function JournalForm({onSubmit}) {
           <img src="./icons/calendar.svg" alt="Иконка календаря"/>
           <span>Дата</span>
         </label>
-        <Input ref={dateRef} onChange={inputOnChange} value={values.date} type="date" name="date" id="date"
+        <Input ref={dateRef} onChange={inputOnChange}
+               value={values.date ? new Date(values.date).toISOString().slice(0, 10) : ''}
+               type="date"
+               name="date" id="date"
                isValid={isValid.date}/>
       </div>
 
@@ -82,6 +99,9 @@ function JournalForm({onSubmit}) {
           <img src="./icons/folder.svg" alt="Иконка папки"/>
           <span>Метки</span>
         </label>
+        {/*<div className="Tags">*/}
+        {/*  <Tags/>*/}
+        {/*</div>*/}
         <Input onChange={inputOnChange} value={values.tag} type="text" name="tag" id="tag"/>
       </div>
 

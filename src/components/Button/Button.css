@@ -12,11 +12,11 @@
 
 @media (any-hover: hover) {
   .btn:hover {
-    background: #d53963;
+    background: linear-gradient(144deg, #AF40FF, #5B42F3 70%, #00DDEB);
 
   }
 }
 
 .btn--accent {
-  background: #E9426F;
+  background: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB);
 }

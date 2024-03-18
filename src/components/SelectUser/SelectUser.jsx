@@ -12,8 +12,8 @@ function SelectUser() {
   return (
     <>
       <select name="user" id="user" value={userId} onChange={changeUser} className={st['select']}>
-        <option value="1">Леонид</option>
-        <option value="2">Вася</option>
+        <option value="1">Вася</option>
+        <option value="2">Коля</option>
         <option value="3">Петя</option>
       </select>
     </>

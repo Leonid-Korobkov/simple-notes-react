@@ -6,7 +6,7 @@ import {formReducer, INITIAL_FORM_STATE} from './JournalForm.state.js';
 import Input from '../Input/Input.jsx';
 import {UserContext} from '../../context/user.context.jsx';
 
-function JournalForm({onSubmit, dataNote}) {
+function JournalForm({onSubmit, dataNote, onDeleteItem}) {
   // const [formValidState, setFormValidState] = useState(INITIAL_VALID_STATE)
   const [formState, dispatchForm] = useReducer(formReducer, INITIAL_FORM_STATE)
   const {isValid, values, isFormReadyToSubmit} = formState;
@@ -32,6 +32,10 @@ function JournalForm({onSubmit, dataNote}) {
   }
 
   useEffect(() => {
+    if (!dataNote) {
+      dispatchForm({type: 'CLEAR_VALUES'})
+      dispatchForm({type: 'SET_VALUES', payload: {userId}})
+    }
     dispatchForm({type: 'SET_VALUES', payload: {...dataNote}})
   }, [dataNote]);
 
@@ -55,7 +59,7 @@ function JournalForm({onSubmit, dataNote}) {
     if (isFormReadyToSubmit) {
       onSubmit(values);
       dispatchForm({type: 'CLEAR_VALUES'})
-      // dispatchForm({type: 'SET_VALUES', payload: {userId}})
+      dispatchForm({type: 'SET_VALUES', payload: {userId}})
     }
   }, [isFormReadyToSubmit, values, onSubmit]);
 
@@ -75,11 +79,20 @@ function JournalForm({onSubmit, dataNote}) {
     dispatchForm({type: 'SET_VALUES', payload: {[name]: value}})
   }
 
+  function deleteJournalItem() {
+    onDeleteItem(dataNote.id);
+    dispatchForm({type: 'CLEAR_VALUES'});
+    dispatchForm({type: 'SET_VALUES', payload: {userId}});
+  }
+
   return (
     <form action="#" className={st['journal-form']} name="journal-form" onSubmit={addJournalItem}>
       <div className={st['form-row']}>
         <Input ref={titleRef} onChange={inputOnChange} value={values.title} type="text" name="title"
                appearance={'title'} isValid={isValid.title}/>
+        {dataNote?.id && <button onClick={deleteJournalItem} type="button" className={cn(st['delete'], 'delete')}>
+          <img src="./icons/archive.svg" alt="Удалить"/>
+        </button>}
       </div>
 
       <div className={st['form-row']}>

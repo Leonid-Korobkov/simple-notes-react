@@ -7,7 +7,8 @@ import JournalAddButton from './components/JournalAddButton/JournalAddButton.jsx
 import JournalForm from './components/JournalForm/JournalForm.jsx'
 import useLocalstorage from './hooks/useLocalstorage.js';
 import UserContextProvider from './context/user.context.jsx';
-import {useState} from 'react';
+import {useReducer, useState} from 'react';
+import {formReducer, INITIAL_FORM_STATE} from './components/JournalForm/JournalForm.state.js';
 
 // const INITIAL_DATA = [
 //   {
@@ -50,8 +51,9 @@ function mapItems(items) {
 }
 
 function App() {
+  const [formState, dispatchForm] = useReducer(formReducer, INITIAL_FORM_STATE)
   const [notes, setNotes] = useLocalstorage('notes')
-  const [selectedItem, setSelectedItem] = useState()
+  const [selectedItem, setSelectedItem] = useState(null)
 
   function addItem(item) {
     if (!item.id) { // Создание item
@@ -75,16 +77,25 @@ function App() {
     }
   }
 
+  function deleteItem(id) {
+    setNotes([...notes.filter(i => i.id !== id)]);
+    setSelectedItem({})
+  }
+
+  function clearForm() {
+    setSelectedItem(null)
+  }
+
   return (
     <UserContextProvider>
       <div className="app">
         <LeftPanel>
           <Header></Header>
-          <JournalAddButton></JournalAddButton>
+          <JournalAddButton onClick={clearForm}></JournalAddButton>
           <JournalList notes={mapItems(notes)} setItem={setSelectedItem}></JournalList>
         </LeftPanel>
         <Body>
-          <JournalForm onSubmit={addItem} dataNote={selectedItem}></JournalForm>
+          <JournalForm onSubmit={addItem} dataNote={selectedItem} onDeleteItem={deleteItem}></JournalForm>
         </Body>
       </div>
     </UserContextProvider>

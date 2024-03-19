@@ -88,7 +88,7 @@ function App() {
     } else { // Обновление текущего item
       setNotes([
         ...mapItems(notes).map(i => {
-          if (i.id == item.id) {
+          if (i.id === item.id) {
             return {...item}
           }
           return i

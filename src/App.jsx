@@ -6,9 +6,10 @@ import JournalList from './components/JournalList/JournalList.jsx'
 import JournalAddButton from './components/JournalAddButton/JournalAddButton.jsx'
 import JournalForm from './components/JournalForm/JournalForm.jsx'
 import useLocalstorage from './hooks/useLocalstorage.js';
-import UserContextProvider from './context/user.context.jsx';
-import {useReducer, useState} from 'react';
-import {formReducer, INITIAL_FORM_STATE} from './components/JournalForm/JournalForm.state.js';
+import {useContext, useEffect, useState} from 'react';
+import BurgerMenu from './components/BurgerMenu/BurgerMenu.jsx';
+import HeaderBody from './components/HeaderBody/HeaderBody.jsx';
+import {SideBarContext} from './context/sidebar.context.jsx';
 
 // const INITIAL_DATA = [
 //   {
@@ -51,9 +52,28 @@ function mapItems(items) {
 }
 
 function App() {
-  const [formState, dispatchForm] = useReducer(formReducer, INITIAL_FORM_STATE)
   const [notes, setNotes] = useLocalstorage('notes')
   const [selectedItem, setSelectedItem] = useState(null)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth); // Track screen width
+  const {isOpened, setIsOpened} = useContext(SideBarContext)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (selectedItem && screenWidth < 768) {
+      setIsOpened(!isOpened)
+    }
+  }, [selectedItem])
 
   function addItem(item) {
     if (!item.id) { // Создание item
@@ -84,21 +104,32 @@ function App() {
 
   function clearForm() {
     setSelectedItem(null)
+    setIsOpened(!isOpened)
   }
 
   return (
-    <UserContextProvider>
-      <div className="app">
-        <LeftPanel>
-          <Header></Header>
-          <JournalAddButton onClick={clearForm}></JournalAddButton>
-          <JournalList notes={mapItems(notes)} setItem={setSelectedItem}></JournalList>
-        </LeftPanel>
-        <Body>
-          <JournalForm onSubmit={addItem} dataNote={selectedItem} onDeleteItem={deleteItem}></JournalForm>
-        </Body>
-      </div>
-    </UserContextProvider>
+    <div className="app">
+      <LeftPanel>
+
+        {screenWidth >= 768 ? ( // Render Header conditionally based on screen width
+          <Header/>
+        ) : null}
+
+        <JournalAddButton onClick={clearForm}></JournalAddButton>
+        <JournalList notes={mapItems(notes)} setItem={setSelectedItem}></JournalList>
+      </LeftPanel>
+      <Body>
+
+        {screenWidth < 768 ? ( // Render Header conditionally based on screen width
+          <HeaderBody>
+            <BurgerMenu/>
+            <Header/>
+          </HeaderBody>
+        ) : null}
+
+        <JournalForm onSubmit={addItem} dataNote={selectedItem} onDeleteItem={deleteItem}></JournalForm>
+      </Body>
+    </div>
   )
 }
 

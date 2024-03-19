@@ -13,7 +13,6 @@
 @media (any-hover: hover) {
   .btn:hover {
     background: linear-gradient(144deg, #AF40FF, #5B42F3 70%, #00DDEB);
-
   }
 }
 

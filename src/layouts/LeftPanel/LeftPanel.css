@@ -4,3 +4,35 @@
   flex-direction: column;
   gap: 30px;
 }
+
+@media screen and (max-width: 1024px) {
+  .left-panel {
+    min-width: 280px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .left-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    bottom: 0;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    background: #242424;
+    padding: 15px;
+  }
+
+  .left-panel.show {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
